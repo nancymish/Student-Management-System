@@ -54,7 +54,9 @@ exports.login = async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
+      secure: true,
+      sameSite: "None",
+      maxAge: 20 * 24 * 60 * 60 * 1000, // 20 days
     });
 
     res.status(200).json({
@@ -74,9 +76,9 @@ exports.login = async (req, res) => {
 exports.logout = (req, res) => {
   res.cookie("token", "", {
     httpOnly: true,
-    expires: new Date(0), // 🔥 immediately expires cookie
-    sameSite: "lax",
-    secure: false, // true in production
+    secure: true,
+    sameSite: "None",
+    expires: new Date(0),
   });
 
   res.status(200).json({ message: "Logged out successfully" });
