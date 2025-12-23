@@ -13,10 +13,16 @@ connectDB();
 
 app.use(
   cors({
-    origin: "http://localhost:5173", // frontend URL
+    origin: "https://student-management-system-topaz-chi.vercel.app",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   })
 );
+
+app.get("/", (req, res) => {
+  res.send("Backend running...");
+});
+
 
 app.use(cookieParser());
 app.use(express.json());
